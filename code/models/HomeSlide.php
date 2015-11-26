@@ -11,15 +11,13 @@ class HomeSlide extends DataObject {
     private static $db = array(
         "Title" => "Varchar(255)",
         "Content" => "Text",
-        "ExternalLinkURL" => "Varchar(255)",
-        "LinkTitle" => "Varchar(255)",
         "Status" => "Boolean",
         "Sort" => "Int"
     );
 
     private static $has_one = array(
         "HomePage" => "HomePage",
-        "LinkTo" => "Page",
+        "Link" => "Link",
         "Image" => "Image"
     );
 
@@ -49,13 +47,31 @@ class HomeSlide extends DataObject {
 
     public function getCMSFields() {
         $fields = new FieldList(
-            OptionsetField::create('Status', 'Status', array("1" => "Active", "0" => "Not Active"), 1),
-            TextField::create('Title', 'Title')->setDescription("Title of the slide"),
-            TextareaField::create('Content', 'Content')->setDescription("Content of the slide"),
-            DropdownField::create("LinkToID", "Internal Link", Page::get()->map())->setEmptyString("Select a page"),
-            TextField::create("ExternalLinkURL", "External Link")->setAttribute("placeholder", "http://website.com/"),
-            TextField::create('LinkTitle', 'Link Title')->setDescription("Title of link"),
-            UploadField::create('Image', 'Image')->setFolderName("HomeSlides")
+            OptionsetField::create(
+                'Status',
+                'Status',
+                array(
+                    "1" => "Active",
+                    "0" => "Not Active"
+                ),
+                1
+            ),
+            TextField::create(
+                'Title',
+                'Title'
+            )->setDescription("Title of the slide"),
+            TextareaField::create(
+                'Content',
+                'Content'
+            )->setDescription("Content of the slide"),
+            LinkField::create(
+				'LinkID',
+				'Link'
+			),
+            UploadField::create(
+                'Image',
+                'Image'
+            )->setFolderName("HomeSlides")
         );
         return $fields;
     }
