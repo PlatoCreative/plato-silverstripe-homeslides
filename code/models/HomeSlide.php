@@ -4,7 +4,8 @@
 *
 * @package plato-silverstripe-homeslides
 */
-class HomeSlide extends DataObject {
+class HomeSlide extends DataObject
+{
 
     private static $default_sort = "Sort";
 
@@ -45,7 +46,8 @@ class HomeSlide extends DataObject {
     //     return ($this->canDelete($member));
     // }
 
-    public function getCMSFields() {
+    public function getCMSFields()
+    {
         $fields = new FieldList(
             OptionsetField::create(
                 'Status',
@@ -65,9 +67,9 @@ class HomeSlide extends DataObject {
                 'Content'
             )->setDescription("Content of the slide"),
             LinkField::create(
-				'LinkID',
-				'Link'
-			),
+                'LinkID',
+                'Link'
+            ),
             UploadField::create(
                 'Image',
                 'Image'
@@ -76,8 +78,8 @@ class HomeSlide extends DataObject {
         return $fields;
     }
 
-    public function getCurrentStatus() {
+    public function getCurrentStatus()
+    {
         return ($this->Status == 1 ? "Active" : "Not Active");
     }
-
 }
