@@ -8,11 +8,11 @@
 class HomePageExtension extends DataExtension
 {
     /**
-	 * @var array
-	 */
+     * @var array
+     */
     private static $has_many = array(
-		"HomeSlides" => "HomeSlide"
-	);
+        "HomeSlides" => "HomeSlide"
+    );
 
     /**
      * @return FieldList
@@ -20,10 +20,12 @@ class HomePageExtension extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $slidesConfig = new GridFieldConfig_RelationEditor();
-        if(class_exists('GridFieldSortableRows')) $slidesConfig->addComponent(new GridFieldSortableRows('Sort'));
+        if (class_exists('GridFieldSortableRows')) {
+            $slidesConfig->addComponent(new GridFieldSortableRows('Sort'));
+        }
 
-		$slidesGrid = GridField::create('HomeSlides', 'HomeSlides', $this->owner->HomeSlides(), $slidesConfig);
-		$fields->addFieldToTab('Root.Slides', $slidesGrid);
+        $slidesGrid = GridField::create('HomeSlides', 'HomeSlides', $this->owner->HomeSlides(), $slidesConfig);
+        $fields->addFieldToTab('Root.Slides', $slidesGrid);
 
         return $fields;
     }
@@ -32,7 +34,8 @@ class HomePageExtension extends DataExtension
      * @return String
      * @config()
      */
-    public function getSlideEffect() {
+    public function getSlideEffect()
+    {
         return ($this->owner->config()->SlideEffect ? $this->owner->config()->SlideEffect : "fade");
     }
 
@@ -40,7 +43,8 @@ class HomePageExtension extends DataExtension
      * @return Int
      * @config()
      */
-    public function getSlideSpeed() {
+    public function getSlideSpeed()
+    {
         return ($this->owner->config()->SlideSpeed ? $this->owner->config()->SlideSpeed : 500);
     }
 
@@ -48,8 +52,8 @@ class HomePageExtension extends DataExtension
      * @return Int
      * @config()
      */
-    public function getSlideTimeout() {
+    public function getSlideTimeout()
+    {
         return ($this->owner->config()->SlideTimeout ? $this->owner->config()->SlideTimeout : 4000);
     }
-
 }
